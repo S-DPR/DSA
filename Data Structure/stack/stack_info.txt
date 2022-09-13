@@ -10,7 +10,7 @@ Kotlin은 mutableListOf<E>가 스택의 역할을 할 수 있습니다.
 Java는 java.util.stack을 import해서 쓰도록 합시다. 스택에 시간을 쏟기는 아깝습니다..
 
 여기서 구현한 두 스택은 그렇게 효율적인 편은 아닙니다.
-매번 arr을 재조정하는건 효율적인편은 아니라..
+매번 arr을 재조정하는거 자체가 효율적인편이 아니라..
 보통 vector처럼 두 배씩 늘리면서 resize단계를 한번씩 거칠겁니다. 아마도요.
 
 유리한 연산에는 push, pop, indexing이 있습니다.
