@@ -36,4 +36,4 @@ y, x = map(int, input().split())
 d = deque([[x, y, [[0]*5 for _ in ' '*5], 1, 0]])
 while d and ans==10**9:
     bfs(*d.popleft())
-print(ans if ans < 10**9 else -1)
+print(ans if ans < 10**9 else -1) 
