@@ -6,7 +6,7 @@ def print_complete_binary_tree(based_1_tree):
     while (1 << cnt) - 1 < len(tree):
         cnt += 1
     dist = (1 << cnt)*t
-    print(f"{' '*(dist-1)}{tree[0]:0{t}d}", end = '')
+    print(f"{' '*(dist-t)}{tree[0]:0{t}d}", end = '')
     idx = 1; cnt = 0; pls = 2
     while idx < len(tree):
         if cnt < idx:
