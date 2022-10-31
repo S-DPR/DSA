@@ -107,7 +107,7 @@ bool comp(Query i, Query j) {
     return A < B;
 }
 
-// 여담으로, 배열이나 구조체의 주솟값을 넘겨주게 하는것과 그렇지 않은것에는 속도에 엄청난 차이를 나게 합니다.
+// 배열이나 구조체의 주솟값을 넘겨주게 하는것과 그렇지 않은것에는 속도에 엄청난 차이를 나게 합니다.
 ll cnt(vector<int>& k, Fenwick &arrcnt, Fenwick &brrcnt) {
     ll res = 0;
     for (int i = 0, j = k.size() - 1; i < k.size() - 1; i++, j--)
