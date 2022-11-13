@@ -3,7 +3,7 @@ from itertools import permutations
 input = sys.stdin.readline
 MAX = 10**5
 """
-22943번 수
+22943번 수 
 
 정수 K, M이 주어진다.
 0~9중 K개를 골라 만든 수 중에서 아래 조건과 같은 수의 개수를 출력하라.
