@@ -12,6 +12,7 @@ input = sys.stdin.readline
 제일 간단하게 쓸 수 있는 제곱수 체크 함수는,
 issquare = lambda x: int(x**.5) == x**.5
 로 짤 수 있지만 이건 큰 수의 제곱수판별에서 실수오차를 냅니다.
+예를들어, 89011483755109777에서..
 
 다음으로 정밀하게 하는데는
 issquare = lambda x: int(x**.5)**2 == x
