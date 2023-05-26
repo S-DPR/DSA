@@ -3,11 +3,11 @@ https://www.acmicpc.net/problem/10610 \
  : 30을 약수로 갖는 수?
 
 2. 온라인 판매 (S4)\
-https://www.acmicpc.net/problem/1246
+https://www.acmicpc.net/problem/1246 \
  : 한번 돈좀 벌어봅시다.
 
 3. 세 수 고르기 (S2)\
-https://www.acmicpc.net/problem/1503
+https://www.acmicpc.net/problem/1503 \
  : |N-xyz|라니, 해괴한 식이네요.
 
 4. 다운로드 (S2)\
