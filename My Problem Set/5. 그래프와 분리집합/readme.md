@@ -26,7 +26,7 @@ https://www.acmicpc.net/problem/10026 \
 https://www.acmicpc.net/problem/1987 \
  : BFS보다 DFS가 나은점이라면요, 방문표시를 덜어내기가 쉽다는게 있어요.\
  : 잘 안나와서 전전단계에 쓰진 않았는데, 비트마스킹에 대해서도 알아는 봅시다.\
- : 선행문제 : 집합(S5) - https://www.acmicpc.net/problem/11723 \
+ : 선행문제 : 집합(S5) - https://www.acmicpc.net/problem/11723
 
 8. 토마토 (G5)\
 https://www.acmicpc.net/problem/7576 \
