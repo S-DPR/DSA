@@ -120,7 +120,7 @@ func main() {
 }
 
 /*
-루비는 아래코드. (시간초과)
+루비는 아래코드. (시간초과..였는데 출력 방식 바꾸니까 맞네요. 참..)
 def bfs(start)
   dist = [INF]*(N+1)
   dist[start] = 0
@@ -147,7 +147,7 @@ M.times do
 end
 dist = bfs(N)
 Q = [1]
-color = ""
+color = []
 visit = [false]*(N+1)
 visit[1] = true
 color_cnt = 0
@@ -167,8 +167,9 @@ until Q.empty?
     end
   end
   break if minC == INF
-  color += "#{minC} "
+  color << minC
   color_cnt += 1
 end
-print color_cnt, "\n", color
+print color_cnt, "\n"
+color.each do |i| print i, " " end
 */
