@@ -42,12 +42,10 @@ function dfs(x, s) {
 }
 
 let N = ini(0)
-let arr = [0]
+let arr = [0].concat(ins(1))
 let size = []
 let [G, U] = [[], []]
 let S = Array(N+1).fill(1)
-for (let i = 1; i <= N; i++)
-    arr[i] = ini(i)
 for (let i = 0; i <= N; i++) {
     G.push([])
     U[i] = i
@@ -56,9 +54,10 @@ for (let i = 0; i <= N; i++) {
 size.sort((i, j) => {
     return j[0]-i[0]
 })
-for (let i = 1; i < N; i++) {
-    G[i].push(i+1)
-    G[i+1].push(i)
+for (let i = 2; i <= N; i++) {
+    let [u, v] = ins(i)
+    G[u].push(v)
+    G[v].push(u)
 }
 let ret = 0
 size.forEach(i => {
