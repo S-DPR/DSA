@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+          {
+            "label": "python",
+            "type": "shell",
+            "command": "c:/Users/Glory/Desktop/codeZip/VSC/bat/codeRunner.py",
+            "args": [
+                "${file}"
+            ]
+          }
+    ]
+}
