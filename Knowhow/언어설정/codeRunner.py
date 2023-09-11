@@ -17,11 +17,10 @@ class Path:
             with open(self.stdInput, "w"): None
 
 class Language:
-    def __init__(self, codeFile, buildTool, executableFile, outputs,
+    def __init__(self, buildTool, executableFile, outputs,
                  buildExtra=None, runExtra=None):
         if not buildExtra: buildExtra = []
         if not runExtra: runExtra = []
-        self.codeFile = codeFile
         self.buildTool = buildTool
         self.executableFile = executableFile
         self.outputs = outputs
@@ -30,17 +29,21 @@ class Language:
         self.runExtra = runExtra
 
 lang: {str: Language} = {
-    "c"     : Language("main.c"    , ["gcc"]        , "a.exe"     , ["a.exe"]),
-    "cpp"   : Language("main.cpp"  , ["g++"]        , "a.exe"     , ["a.exe"]),
-    "rb"    : Language("main.rb"   , ["ruby"]       , "main.rb"   , []),
-    "rs"    : Language("main.rs"   , ["rustc"]      , "main.exe"  , ["main.exe", "main.pdb"]),
-    "java"  : Language("Main.java" , ["java"]       , "Main.java" , []),
-    "swift" : Language("main.swift", ["swiftc"]     , "main.exe"  , ["main.exe", "main.exp", "main.lib"]),
-    "kt"    : Language("main.kt"   , ["kotlinc"]    , "MainKt.jar", ["MainKt.jar"], ["-d", fr"{Path.exe}\MainKt.jar"], ["java", "-jar"]),
-    "go"    : Language("main.go"   , ["go", "build"], "main.exe"  , ["main.exe"]),
-    "py"    : Language("main.py"   , ["python"]     , "main.py"   , [])
+    "c"     : Language(["gcc"]        , "a.exe"     , ["a.exe"]),
+    "cpp"   : Language(["g++"]        , "a.exe"     , ["a.exe"]),
+    "rb"    : Language(["ruby"]       , "main.rb"   , []),
+    "rs"    : Language(["rustc"]      , "main.exe"  , ["main.exe", "main.pdb"]),
+    "java"  : Language(["java"]       , "Main.java" , []),
+    "swift" : Language(["swiftc"]     , "main.exe"  , ["main.exe", "main.exp", "main.lib"]),
+    "kt"    : Language(["kotlinc"]    , "MainKt.jar", ["MainKt.jar"], ["-d", fr"{Path.exe}\MainKt.jar"], ["java", "-jar"]),
+    "go"    : Language(["go", "build"], "main.exe"  , ["main.exe"]),
+    "py"    : Language(["python"]     , "main.py"   , []),
+    "js"    : Language(["node"]       , "main.js"   , []),
+    "cs"    : Language(["dotnet", "script"], "main.cs", [])
 }
 
+filePath = sys.argv[1]
+fileName = sys.argv[1].split("\\")[-1]
 extension = sys.argv[1].split(".")[-1]
 P = Path()
 def run(extension):
@@ -51,7 +54,7 @@ def run(extension):
     info: Language = lang[extension]
     fail = False
     if info.needCompile:
-        runArgs = [*info.buildTool, fr"{P.home}\{info.codeFile}", *info.buildExtra]
+        runArgs = [*info.buildTool, filePath, *info.buildExtra]
         compile_process = subprocess.run(runArgs, stderr=subprocess.PIPE, cwd=P.exe, shell=True)
         fail = compile_process.returncode != 0
 
@@ -62,7 +65,7 @@ def run(extension):
             exeFile = info.executableFile
         else:
             exePath = P.home
-            exeFile = info.codeFile
+            exeFile = fileName
             runArgs += info.buildTool
         runArgs.append(fr"{exePath}\{exeFile}")
         with P.openInput as inputFile, P.openOutput as outputFile:
