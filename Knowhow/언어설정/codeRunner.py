@@ -1,4 +1,5 @@
 import subprocess, os, sys
+import time
 
 class Path:
     home = r"C:\Users\Glory\Desktop\codeZip\VSC"
@@ -63,26 +64,31 @@ def run(extension):
         if info.needCompile:
             exePath = P.exe
             exeFile = info.executableFile
+            runArgs.append(fr"{exePath}\{exeFile}")
         else:
-            exePath = P.home
+            exePath = filePath.split("\\")[:-1]
             exeFile = fileName
             runArgs += info.buildTool
-        runArgs.append(fr"{exePath}\{exeFile}")
+            runArgs.append('\\'.join(exePath)+fr"\{exeFile}")
+        print("Running")
+        startTime = time.time()
         with P.openInput as inputFile, P.openOutput as outputFile:
-            process = subprocess.run(runArgs, stdin=inputFile, stdout=outputFile)
+            process = subprocess.run(runArgs, stdin=inputFile, stdout=outputFile, stderr=outputFile)
+        endTime = time.time()
+        print(f"Process Running Time : {endTime-startTime}")
         fail = process.returncode != 0
 
     delete(info.outputs)
     if fail:
-        print("Compilation failed.")
-        print("Error message:", compile_process.stderr.decode('utf-8'))
+        print("Compilation Failed.")
+        print("Error Message:", compile_process.stderr.decode('utf-8'))
     else:
         print("success")
-    input()
 
 def delete(outputs):
     for output in outputs:
         if not os.path.exists(fr"{P.exe}/{output}"): continue
         os.remove(fr"{P.exe}/{output}")
 
-run(extension)
+if __name__ == "__main__":
+    run(extension)
