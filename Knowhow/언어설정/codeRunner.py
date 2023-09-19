@@ -1,5 +1,6 @@
 import subprocess, os, sys
 import time
+from timeit import timeit
 
 class Path:
     home = r"C:\Users\Glory\Desktop\codeZip\VSC"
@@ -8,7 +9,7 @@ class Path:
     stdInput = fr"{io}\input.txt"
     stdOutput = fr"{io}\result.txt"
     openInput = open(stdInput, "r")
-    openOutput = open(stdOutput, "w")
+    openOutput = open(stdOutput, "w", encoding="utf-8")
     def __init__(self):
         if not os.path.exists(self.exe):
             os.makedirs(self.exe)
@@ -36,11 +37,11 @@ lang: {str: Language} = {
     "rs"    : Language(["rustc"]      , "main.exe"  , ["main.exe", "main.pdb"]),
     "java"  : Language(["java"]       , "Main.java" , []),
     "swift" : Language(["swiftc"]     , "main.exe"  , ["main.exe", "main.exp", "main.lib"]),
-    "kt"    : Language(["kotlinc"]    , "MainKt.jar", ["MainKt.jar"], ["-d", fr"{Path.exe}\MainKt.jar"], ["java", "-jar"]),
+    "kt"    : Language(["kotlinc"]    , "MainKt.jar", ["MainKt.jar"], ["-include-runtime", "-d", fr"{Path.exe}\MainKt.jar"], ["java", "-jar"]),
     "go"    : Language(["go", "build"], "main.exe"  , ["main.exe"]),
     "py"    : Language(["python"]     , "main.py"   , []),
     "js"    : Language(["node"]       , "main.js"   , []),
-    "cs"    : Language(["dotnet", "script"], "main.cs", [])
+    "cs"    : Language(["dotnet", "script"], "main.cs", []),
 }
 
 filePath = sys.argv[1]
@@ -56,10 +57,10 @@ def run(extension):
     fail = False
     if info.needCompile:
         runArgs = [*info.buildTool, filePath, *info.buildExtra]
-        compile_process = subprocess.run(runArgs, stderr=subprocess.PIPE, cwd=P.exe, shell=True)
-        fail = compile_process.returncode != 0
+        process = subprocess.run(runArgs, stderr=subprocess.PIPE, cwd=P.exe, shell=True)
+        fail = process.returncode != 0
 
-    if not info.needCompile or compile_process.returncode == 0:
+    if not info.needCompile or process.returncode == 0:
         runArgs = info.runExtra
         if info.needCompile:
             exePath = P.exe
@@ -81,7 +82,8 @@ def run(extension):
     delete(info.outputs)
     if fail:
         print("Compilation Failed.")
-        print("Error Message:", compile_process.stderr.decode('utf-8'))
+        if process.stderr:
+            print("Error Message:", process.stderr.decode('utf-8'))
     else:
         print("success")
 
