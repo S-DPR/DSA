@@ -21,7 +21,7 @@ func bisect(_ A: [Int], _ x: Int) -> Int {
     var (lo, hi) = (0, A.count)
     while lo < hi {
         let mid = (lo + hi) >> 1
-        if A[mid] > x {
+        if A[mid] >= x {
             hi = mid 
         } else {
             lo = mid + 1
