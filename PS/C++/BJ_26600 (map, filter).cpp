@@ -4,7 +4,7 @@
 #define ll long long
 using namespace std;
 /*
-26600번 map, filter
+26600번 map, filter 
 
 6개의 연산이 있다. 각 연산에 대해 값을 출력해보자.
 map + x : x를 배열의 모든 원소에 더한다.
