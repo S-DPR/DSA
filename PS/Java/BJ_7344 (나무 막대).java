@@ -1,6 +1,20 @@
 import java.io.*;
 import java.util.*;
+/*
+7344번 나무 막대
 
+길이 L과 무게 W로 이루어진 나무막대가 N개 있다.
+이 나무막대를 조각하려는데 이번에 조각할 것이 이전에 조작할 것보다 무게가 같거나 크고 길이가 같거나 길다면 비용을 지불하지 않아도 된다.
+최소 몇 번 비용을 지불해야할까?
+
+이거 어떻게하냐 생각하다가..
+일단 그리디는 맞는거같고.. 길이순 정렬은 맞는거같고..
+트리맵써야하나..? 하다가 태그 까보니까 정렬그리디가 끝이네?
+
+아니 대체 머지? 근데 보니까 N이 최대 5000이네?
+어? N^2이 되네? 그러면 넉넉하게 완탐 해도 되겠는데?
+하고 AC. 최적화해야했으면 더 어려웠을 문제같네요. 한 10만이었다면..
+*/
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
