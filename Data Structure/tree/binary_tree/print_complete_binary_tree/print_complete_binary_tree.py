@@ -19,12 +19,28 @@ def print_complete_binary_tree(based_1_tree):
             bonus = dist
         print(f"{' '*(dist+bonus-t)}{tree[idx]:0{t}d}", end = '')
         idx += 1
+    print()
+    print()
 
-arr = list(range(1, 6))
-n = len(arr)
-seg = [0]*(n*2)
-for i in range(n):
-    seg[i+n] = arr[i]
-for i in range(n-1, 0, -1):
-    seg[i] = seg[i<<1] + seg[i<<1|1]
-print_complete_binary_tree(seg)
+def push(x):
+    idx = len(items)
+    items.append(x)
+    print_complete_binary_tree(items)
+    while idx != 1 and items[idx>>1] > x:
+        items[idx] = items[idx>>1]
+        items[idx>>1] = x
+        print_complete_binary_tree(items)
+        idx >>= 1
+    if idx != len(items)-1:
+        print_complete_binary_tree(items)
+
+items = []
+q = [[0, 20], [0, 12], [0, 3], [0, 2], [1], [0, 5], [0, 16], [1], [0, 1]]
+import heapq
+for Q in q:
+    if len(Q) == 1:
+        heapq.heappop(items)
+    else:
+        heapq.heappush(items, Q[1])
+items.insert(0, 0)
+print_complete_binary_tree(items)
