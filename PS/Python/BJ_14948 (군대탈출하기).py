@@ -19,24 +19,30 @@ inf = float('inf')
 from collections import deque
 dr = [1, -1, 0, 0]
 dc = [0, 0, 1, -1]
-R, C = ins()
+R, C = map(int, input().split())
 M = [ins() for _ in ' '*R]
-lo, hi = 0, 10**9+1
+lo, hi = M[0][0], 10**9
 while lo < hi:
     mid = (lo + hi) >> 1
-    q = deque([[0, 0]])
-    V = [[0]*C for _ in ' '*R]
-    V[0][0] = 1
+    q = deque([[0, 0, 0]])
+    V = [[[0]*2 for _ in ' '*C] for _ in ' '*R]
+    V[0][0][0] = 1
     while q:
-        r, c = q.popleft()
+        r, c, k = q.popleft()
         for i in range(4):
-            nr, nc = r+dr[i], c+dc[i]
+            nr, nc, nk = r+dr[i], c+dc[i], k
             if not 0 <= nr < R: continue
             if not 0 <= nc < C: continue
-            if M[nr][nc] > mid: continue
-            if V[nr][nc]: continue
-            q.append([nr, nc])
-            V[nr][nc] = 1
-    if V[-1][-1]: hi = mid
+            if M[nr][nc] > mid:
+                if nk == 1: continue
+                nr, nc = nr+dr[i], nc+dc[i]
+                if not 0 <= nr < R: continue
+                if not 0 <= nc < C: continue
+                if M[nr][nc] > mid: continue
+                nk = 1
+            if V[nr][nc][nk]: continue
+            q.append([nr, nc, nk])
+            V[nr][nc][nk] = 1
+    if max(V[-1][-1]): hi = mid
     else: lo = mid + 1
-print(hi-1)
+print(hi)
